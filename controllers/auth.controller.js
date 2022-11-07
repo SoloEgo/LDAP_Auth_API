@@ -3,7 +3,8 @@ const db = require("../models")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 const { authenticate } = require('ldap-authentication');
-const ldapConfig = require("./config/ldap.config");
+const ldapConfig = require("../config/ldap.config");
+const authConfig = require("../config/auth.config")
 
 const User = db.user
 
@@ -71,7 +72,7 @@ exports.signin = async (req, res) => {
 
             //setting token for user
             var token = jwt.sign({ id: user.id }, config.secret, {
-                expiresIn: 30//86400 // 24 hours
+                expiresIn: authConfig.tokenExpire
             });
 
             // it's all ok sending result to front
@@ -91,7 +92,7 @@ exports.signin = async (req, res) => {
         }
 
     } catch (error) {
-        console.log('error -> ', error)
+        //console.log('error -> ', error)
         res.status(404).send({
             userFound: false
         });

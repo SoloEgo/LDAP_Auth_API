@@ -1,8 +1,8 @@
-const express = require("express")
-const json = require("express")
-const urlencoded = require("express")
-const cors = require("cors")
-const db = require("./models")
+const express = require("express");
+const json = require("express");
+const urlencoded = require("express");
+const cors = require("cors");
+const db = require("./models");
 const dbConfig = require("./config/db.config");
 
 db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`,{
